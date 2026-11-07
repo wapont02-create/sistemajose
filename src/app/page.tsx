@@ -80,9 +80,8 @@ export default async function MinimarketPage() {
 
       {/* Contenedor principal del catálogo / productos */}
       <div className="flex-1 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <ClientMenu initialCategories="{menuCategories}"/>
+        <ClientMenu initialCategories={menuCategories} />
       </div>
     </main>
   );
 }
-```[cite: 3]
