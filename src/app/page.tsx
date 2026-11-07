@@ -86,8 +86,3 @@ export default async function MinimarketPage() {
   );
 }
 ```[cite: 3]
-
-### Cambios realizados clave:
-1. **Estética de Minimarket:** Se cambió el fondo vino tinto oscuro (`#140005`) por un tono pizarra oscuro elegante (`#0f172a`) propio de sistemas de comercio modernos[cite: 3].
-2. **Colores de selección y acentos:** Se configuró la selección y los distintivos con verde esmeralda (`emerald-500` / `emerald-400`), que transmite frescura, tiendas de conveniencia y transacciones comerciales eficientes.
-3. **Cabecera comercial:** Se añadió un encabezado superior limpio (`header`) con la etiqueta de Minimarket para darle identidad inmediata de tienda de abastos antes de renderizar los productos del componente cliente (`ClientMenu`)[cite: 3].
