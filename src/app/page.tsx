@@ -14,7 +14,7 @@ async function getProducts() {
     }
 
     const db = new Database(connectionString);
-    // Incluimos image_url en la consulta SQL
+    // Consultamos los productos de la base de datos
     const result: any = await db.sql('SELECT id, name, description, price_usd, category, image_url FROM products;');
     
     if (Array.isArray(result)) return result;
@@ -32,7 +32,7 @@ async function getProducts() {
   }
 }
 
-export default async function TakosushiMenuPage() {
+export default async function MinimarketPage() {
   const products = await getProducts();
 
   const categoriesMap: { [key: string]: any[] } = {};
@@ -41,7 +41,8 @@ export default async function TakosushiMenuPage() {
     products.forEach((prod: any) => {
       if (!prod || !prod.name) return;
       
-      const cat = prod.category || 'COMBOS Y ROLLS';
+      // Categoría por defecto orientada a minimarket si viene vacía
+      const cat = prod.category || 'VÍVERES Y ABASTO';
       if (!categoriesMap[cat]) {
         categoriesMap[cat] = [];
       }
@@ -50,7 +51,7 @@ export default async function TakosushiMenuPage() {
         name: prod.name,
         description: prod.description || '',
         price: prod.price_usd ? Number(prod.price_usd) : 0,
-        image: prod.image_url || '' // Pasamos la URL limpia de la imagen
+        image: prod.image_url || ''
       });
     });
   }
@@ -61,8 +62,32 @@ export default async function TakosushiMenuPage() {
   }));
 
   return (
-    <main className="min-h-screen bg-[#140005] text-white flex flex-col justify-between selection:bg-[#ff007f] selection:text-white pb-24">
-      <ClientMenu initialCategories={menuCategories} />
+    <main className="min-h-screen bg-[#0f172a] text-slate-100 flex flex-col justify-between selection:bg-emerald-500 selection:text-white pb-24">
+      {/* Cabecera / Banner superior opcional para Minimarket */}
+      <header className="w-full bg-[#1e293b] border-b border-slate-800 py-4 px-6 shadow-md mb-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl font-bold tracking-wider text-emerald-400">🛒 MINIMARKET</span>
+            <span className="text-xs bg-emerald-500/10 text-emerald-400 font-semibold px-2.5 py-1 rounded-full border border-emerald-500/20">
+              Abierto / Catálogo Online
+            </span>
+          </div>
+          <p className="text-xs text-slate-400">
+            Encuentra los mejores productos al mejor precio
+          </p>
+        </div>
+      </header>
+
+      {/* Contenedor principal del catálogo / productos */}
+      <div className="flex-1 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <ClientMenu initialCategories={menuCategories} />
+      </div>
     </main>
   );
 }
+```[cite: 3]
+
+### Cambios realizados clave:
+1. **Estética de Minimarket:** Se cambió el fondo vino tinto oscuro (`#140005`) por un tono pizarra oscuro elegante (`#0f172a`) propio de sistemas de comercio modernos[cite: 3].
+2. **Colores de selección y acentos:** Se configuró la selección y los distintivos con verde esmeralda (`emerald-500` / `emerald-400`), que transmite frescura, tiendas de conveniencia y transacciones comerciales eficientes.
+3. **Cabecera comercial:** Se añadió un encabezado superior limpio (`header`) con la etiqueta de Minimarket para darle identidad inmediata de tienda de abastos antes de renderizar los productos del componente cliente (`ClientMenu`)[cite: 3].
