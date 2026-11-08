@@ -1,87 +1,118 @@
-import ClientMenu from '@/components/ClientMenu';
-import { Database } from '@sqlitecloud/drivers';
+import Link from 'next/link';
 
-// Forzar que esta página sea dinámica y consulte la base de datos en tiempo real
 export const dynamic = 'force-dynamic';
 
-async function getProducts() {
-  try {
-    const connectionString = process.env.DATABASE_URL || process.env.SQLITECLOUD_CONNECTION_STRING;
-    
-    if (!connectionString) {
-      console.error('Falta la cadena de conexión en las variables de entorno de Vercel');
-      return [];
-    }
-
-    const db = new Database(connectionString);
-    // Consultamos los productos de la base de datos
-    const result: any = await db.sql('SELECT id, name, description, price_usd, category, image_url FROM products;');
-    
-    if (Array.isArray(result)) return result;
-    if (result && Array.isArray(result.rows)) return result.rows;
-    if (result && typeof result === 'object') {
-      const values = Object.values(result);
-      if (Array.isArray(values[0])) return values[0];
-      return values;
-    }
-
-    return [];
-  } catch (error) {
-    console.error('Error al conectar con SQLite Cloud:', error);
-    return [];
-  }
-}
-
-export default async function MinimarketPage() {
-  const products = await getProducts();
-
-  const categoriesMap: { [key: string]: any[] } = {};
-  
-  if (Array.isArray(products) && products.length > 0) {
-    products.forEach((prod: any) => {
-      if (!prod || !prod.name) return;
-      
-      // Categoría por defecto orientada a minimarket si viene vacía
-      const cat = prod.category || 'VÍVERES Y ABASTO';
-      if (!categoriesMap[cat]) {
-        categoriesMap[cat] = [];
-      }
-      categoriesMap[cat].push({
-        id: prod.id || Math.random(),
-        name: prod.name,
-        description: prod.description || '',
-        price: prod.price_usd ? Number(prod.price_usd) : 0,
-        image: prod.image_url || ''
-      });
-    });
-  }
-
-  const menuCategories = Object.keys(categoriesMap).map(cat => ({
-    category: cat,
-    items: categoriesMap[cat]
-  }));
-
+export default function MinimarketPage() {
   return (
-    <main className="min-h-screen bg-[#0f172a] text-slate-100 flex flex-col justify-between selection:bg-emerald-500 selection:text-white pb-24">
-      {/* Cabecera / Banner superior opcional para Minimarket */}
-      <header className="w-full bg-[#1e293b] border-b border-slate-800 py-4 px-6 shadow-md mb-4">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl font-bold tracking-wider text-emerald-400">🛒 MINIMARKET</span>
-            <span className="text-xs bg-emerald-500/10 text-emerald-400 font-semibold px-2.5 py-1 rounded-full border border-emerald-500/20">
-              Abierto / Catálogo Online
-            </span>
+    <main className="min-h-screen bg-slate-950 text-white overflow-hidden">
+
+      {/* Fondo decorativo */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 -left-40 w-96 h-96 bg-emerald-700/20 rounded-full blur-3xl" />
+      </div>
+
+      {/* Cabecera */}
+      <header className="relative z-10 border-b border-white/10 bg-slate-900/70">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-black tracking-wide">
+              <span className="text-emerald-400">MINIMARKET</span> JOSÉ
+            </h1>
+            <p className="text-xs text-slate-400 mt-1">
+              Centro de Guarenas
+            </p>
           </div>
-          <p className="text-xs text-slate-400">
-            Encuentra los mejores productos al mejor precio
-          </p>
+
+          <Link
+            href="/login"
+            className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-3 rounded-xl transition"
+          >
+            Entrar al sistema
+          </Link>
         </div>
       </header>
 
-      {/* Contenedor principal del catálogo / productos */}
-      <div className="flex-1 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <ClientMenu initialCategories={menuCategories} />
-      </div>
+      {/* Presentación principal */}
+      <section className="relative z-10 min-h-[75vh] flex items-center">
+        <div className="max-w-7xl mx-auto px-6 py-20 w-full grid md:grid-cols-2 gap-12 items-center">
+
+          <div>
+            <span className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded-full text-sm font-semibold mb-7">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full" />
+              Tu minimarket de confianza
+            </span>
+
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight">
+              MINIMARKET
+              <span className="block text-emerald-400">JOSÉ</span>
+            </h2>
+
+            <p className="text-xl sm:text-2xl text-slate-300 mt-7 font-semibold">
+              Ventas al mayor y al detal
+            </p>
+
+            <p className="text-slate-400 text-lg mt-4 max-w-xl leading-relaxed">
+              Productos de calidad al mejor precio.
+              Estamos en el Centro de Guarenas para ofrecerte
+              variedad, calidad y atención de confianza.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link
+                href="/login"
+                className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition"
+              >
+                Entrar al sistema →
+              </Link>
+            </div>
+
+            <p className="text-slate-500 text-sm mt-5">
+              Centro de Guarenas · Venezuela
+            </p>
+          </div>
+
+          {/* Imagen decorativa */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+
+            <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 rounded-3xl p-10 shadow-2xl">
+              <div className="text-center">
+                <div className="text-8xl mb-7">🛒</div>
+
+                <h3 className="text-3xl font-black text-white">
+                  MINIMARKET JOSÉ
+                </h3>
+
+                <div className="w-20 h-1 bg-emerald-400 mx-auto my-6 rounded-full" />
+
+                <p className="text-emerald-400 text-xl font-bold">
+                  Calidad y buenos precios
+                </p>
+
+                <p className="text-slate-400 mt-3">
+                  Tu compra, nuestra prioridad.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Pie de página */}
+      <footer className="relative z-10 border-t border-white/10 bg-slate-900/60">
+        <div className="max-w-7xl mx-auto px-6 py-6 text-center">
+          <p className="text-slate-400 text-sm">
+            © {new Date().getFullYear()} MINIMARKET JOSÉ.
+            Todos los derechos reservados.
+          </p>
+          <p className="text-slate-500 text-xs mt-2">
+            Centro de Guarenas · Ventas al mayor y al detal
+          </p>
+        </div>
+      </footer>
+
     </main>
   );
 }
