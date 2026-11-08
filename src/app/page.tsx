@@ -1,421 +1,299 @@
+```tsx
+import Link from "next/link";
 
-import Link from 'next/link';
+export const dynamic = "force-dynamic";
 
-export const dynamic = 'force-dynamic';
-
-const advantages = [
+const modules = [
   {
-    number: '01',
-    title: 'Calidad',
-    description:
-      'Productos seleccionados para ofrecerte calidad y confianza en cada compra.',
+    number: "01",
+    title: "Punto de venta",
+    description: "Gestión de ventas y operaciones comerciales.",
+    icon: "▣",
   },
   {
-    number: '02',
-    title: 'Variedad',
-    description:
-      'Una amplia variedad de opciones para satisfacer tus necesidades.',
+    number: "02",
+    title: "Inventario",
+    description: "Control y organización de productos.",
+    icon: "▤",
   },
   {
-    number: '03',
-    title: 'Buenos precios',
-    description:
-      'Excelentes opciones comerciales para clientes particulares y negocios.',
+    number: "03",
+    title: "Reportes",
+    description: "Información y análisis del negocio.",
+    icon: "▥",
+  },
+  {
+    number: "04",
+    title: "Clientes",
+    description: "Administración de la información comercial.",
+    icon: "♙",
   },
 ];
 
 export default function MinimarketPage() {
   return (
-    <main className="min-h-screen bg-[#101713] text-white overflow-hidden">
+    <main className="relative min-h-screen overflow-hidden bg-[#080F1D] text-white selection:bg-blue-500/30">
 
-      {/* FONDO DECORATIVO */}
-      <div
-        className="fixed inset-0 pointer-events-none opacity-80"
-        style={{
-          backgroundImage: `
-            radial-gradient(ellipse at 80% 35%, rgba(32, 105, 69, .25), transparent 55%),
-            radial-gradient(ellipse at 15% 90%, rgba(195, 151, 79, .08), transparent 40%),
-            linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px)
-          `,
-          backgroundSize: 'auto, auto, 55px 55px, 55px 55px',
-        }}
-      />
+      {/* FONDO */}
+      <div className="pointer-events-none fixed inset-0">
+        <div className="absolute -top-48 right-[-10%] h-[600px] w-[600px] rounded-full bg-blue-600/10 blur-[140px]" />
+        <div className="absolute bottom-[-200px] left-[-10%] h-[500px] w-[500px] rounded-full bg-cyan-500/[0.07] blur-[130px]" />
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
 
-      {/* NAVEGACIÓN */}
-      <header className="relative z-20 border-b border-white/[0.07] bg-[#101713]/90 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-24 flex items-center justify-between">
+      {/* CONTENEDOR PRINCIPAL */}
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1500px] flex-col px-5 py-5 sm:px-8 lg:px-12">
 
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl border border-[#c49a54]/50 flex items-center justify-center bg-[#c49a54]/10">
-              <span className="text-2xl font-black text-[#d5b477]">
+        {/* BARRA SUPERIOR */}
+        <header className="flex min-h-[76px] items-center justify-between rounded-2xl border border-white/[0.08] bg-[#101B2D]/80 px-5 shadow-xl shadow-black/10 backdrop-blur-xl sm:px-7">
+
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-400/20 bg-gradient-to-br from-blue-500/25 to-cyan-500/10">
+              <span className="text-lg font-black tracking-tighter text-blue-300">
                 MJ
               </span>
             </div>
 
             <div>
-              <p className="text-lg font-black tracking-[0.12em]">
-                MINIMARKET{' '}
-                <span className="text-[#d5b477]">JOSÉ</span>
-              </p>
-              <p className="text-[10px] tracking-[0.25em] text-gray-400 uppercase">
+              <h1 className="text-sm font-extrabold tracking-[0.12em] sm:text-base">
+                MINIMARKET JOSÉ
+              </h1>
+              <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-slate-500">
                 Centro de Guarenas
               </p>
             </div>
-          </Link>
+          </div>
 
-          <nav className="hidden md:flex items-center gap-9 text-sm text-gray-300">
-            <a href="#inicio" className="hover:text-[#d5b477] transition">
-              Inicio
-            </a>
-            <a href="#nosotros" className="hover:text-[#d5b477] transition">
-              Nosotros
-            </a>
-            <a href="#ventajas" className="hover:text-[#d5b477] transition">
-              Nuestra propuesta
-            </a>
-          </nav>
+          <div className="hidden items-center gap-3 rounded-full border border-emerald-400/15 bg-emerald-400/[0.06] px-4 py-2 sm:flex">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.7)]" />
+            <span className="text-[11px] font-semibold tracking-wide text-emerald-300">
+              PLATAFORMA COMERCIAL
+            </span>
+          </div>
 
-          <Link
-            href="/login"
-            className="hidden sm:inline-flex items-center gap-3 border border-[#c49a54]/60 px-5 py-3 rounded-lg text-sm font-bold text-[#e4c58c] hover:bg-[#c49a54] hover:text-[#101713] transition"
-          >
-            Acceder al sistema
-            <span>↗</span>
-          </Link>
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-400">
+            <span className="hidden sm:inline">Venezuela</span>
+            <span className="text-blue-400">◆</span>
+          </div>
 
-          <Link
-            href="/login"
-            className="sm:hidden text-xs font-bold text-[#e4c58c] border border-[#c49a54]/50 px-3 py-2 rounded-lg"
-          >
-            Acceder
-          </Link>
+        </header>
 
-        </div>
-      </header>
+        {/* CONTENIDO */}
+        <section className="flex flex-1 flex-col justify-center py-12 sm:py-16 lg:py-20">
 
-      {/* HERO PRINCIPAL */}
-      <section
-        id="inicio"
-        className="relative z-10 min-h-[690px] flex items-center"
-      >
-        <div className="max-w-7xl w-full mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-[1.2fr_.8fr] gap-16 items-center">
+          {/* ENCABEZADO DE BIENVENIDA */}
+          <div className="mx-auto mb-12 w-full max-w-5xl text-center">
 
-          <div>
-
-            <div className="flex items-center gap-3 mb-9">
-              <span className="w-9 h-[2px] bg-[#c49a54]" />
-              <span className="text-[#d5b477] text-xs font-bold tracking-[0.3em] uppercase">
-                Calidad que genera confianza
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/[0.08] px-4 py-2">
+              <span className="text-xs text-blue-300">✦</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-200">
+                Bienvenido a nuestra plataforma
               </span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-[76px] leading-[1.08] font-black tracking-tight">
-              TU MERCADO.
-              <br />
-              TU CONFIANZA.
-              <br />
-              <span className="bg-gradient-to-r from-[#f1d49b] via-[#c49a54] to-[#ead09b] bg-clip-text text-transparent">
-                TU MEJOR OPCIÓN.
+            <h2 className="text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-7xl">
+              MINIMARKET{" "}
+              <span className="bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
+                JOSÉ
               </span>
-            </h1>
+            </h2>
 
-            <p className="mt-8 text-gray-300 text-lg sm:text-xl leading-relaxed max-w-xl">
-              En{' '}
-              <strong className="text-white">
-                MINIMARKET JOSÉ
-              </strong>{' '}
-              trabajamos para ofrecerte productos de calidad,
-              variedad y excelentes precios.
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base sm:leading-8">
+              Un espacio diseñado para gestionar nuestras operaciones
+              comerciales de forma organizada, eficiente y profesional.
             </p>
-
-            <div className="flex flex-wrap gap-4 mt-10">
-
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-5 bg-gradient-to-r from-[#d8b779] to-[#b78b48] text-[#172019] px-8 py-4 rounded-lg font-extrabold text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c49a54]/20"
-              >
-                ENTRAR AL SISTEMA
-                <span className="text-lg">→</span>
-              </Link>
-
-              <a
-                href="#nosotros"
-                className="inline-flex items-center gap-3 px-7 py-4 rounded-lg border border-white/15 text-gray-200 text-sm font-semibold hover:border-[#c49a54] hover:text-[#e5c58c] transition"
-              >
-                Conócenos
-              </a>
-
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 mt-12 text-sm text-gray-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              Ventas al mayor y al detal
-              <span className="text-gray-600">|</span>
-              Centro de Guarenas
-            </div>
 
           </div>
 
-          {/* PANEL GRÁFICO SIN FOTOGRAFÍAS */}
-          <div className="relative hidden lg:block">
+          {/* PANEL DE ACCESO */}
+          <div className="mx-auto w-full max-w-5xl">
 
-            <div className="absolute inset-0 rounded-full bg-emerald-500/10 blur-[90px]" />
+            <div className="relative overflow-hidden rounded-[28px] border border-blue-400/20 bg-gradient-to-br from-[#142641] via-[#101D31] to-[#0D1728] p-7 shadow-2xl shadow-black/30 sm:p-10 lg:p-12">
 
-            <div className="relative border border-[#c49a54]/25 bg-gradient-to-br from-[#1b2b22] to-[#111b16] rounded-3xl p-10 shadow-2xl">
+              {/* DETALLES DECORATIVOS */}
+              <div className="pointer-events-none absolute -right-20 -top-32 h-80 w-80 rounded-full border border-blue-300/[0.07]" />
+              <div className="pointer-events-none absolute -right-10 -top-20 h-60 w-60 rounded-full border border-blue-300/[0.07]" />
+              <div className="pointer-events-none absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
 
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] tracking-[0.3em] text-[#d5b477] font-bold">
-                  NUESTRA IDENTIDAD
-                </span>
-                <span className="text-[#d5b477] text-xl">✦</span>
-              </div>
+              <div className="relative grid items-center gap-10 lg:grid-cols-[1.1fr_.9fr]">
 
-              <div className="py-16 text-center">
+                {/* TEXTO */}
+                <div>
 
-                <div className="w-32 h-32 mx-auto rounded-3xl border border-[#c49a54]/50 bg-[#c49a54]/10 flex items-center justify-center">
-                  <span className="text-6xl font-black text-[#d5b477]">
-                    MJ
-                  </span>
+                  <div className="mb-5 flex items-center gap-2">
+                    <span className="h-[2px] w-8 bg-blue-400" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-blue-300">
+                      Centro de gestión
+                    </span>
+                  </div>
+
+                  <h3 className="text-3xl font-bold leading-tight sm:text-4xl">
+                    Tu negocio,
+                    <br />
+                    <span className="text-blue-300">
+                      bajo control.
+                    </span>
+                  </h3>
+
+                  <p className="mt-5 max-w-md text-sm leading-7 text-slate-400">
+                    Ingresa a nuestra plataforma de gestión comercial
+                    y accede a las herramientas necesarias para las
+                    operaciones diarias de Minimarket José.
+                  </p>
+
+                  <Link
+                    href="/login"
+                    className="group mt-9 inline-flex w-full items-center justify-center gap-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 px-7 py-4 text-sm font-extrabold tracking-wide text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-1 hover:from-blue-400 hover:to-cyan-500 hover:shadow-blue-500/30 sm:w-auto"
+                  >
+                    <span>ACCEDER AL SISTEMA</span>
+                    <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </Link>
+
+                  <div className="mt-6 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="text-emerald-400">●</span>
+                    Acceso privado para personal autorizado
+                  </div>
+
                 </div>
 
-                <h2 className="mt-9 text-3xl font-black tracking-[0.08em]">
-                  MINIMARKET JOSÉ
-                </h2>
+                {/* IDENTIDAD VISUAL */}
+                <div className="relative mx-auto w-full max-w-[340px]">
 
-                <div className="w-20 h-[2px] bg-gradient-to-r from-[#c49a54] to-transparent mx-auto my-6" />
+                  <div className="absolute inset-5 rounded-full bg-blue-500/20 blur-[70px]" />
 
-                <p className="text-gray-400 text-sm tracking-[0.2em] uppercase">
-                  Calidad · Variedad · Confianza
-                </p>
+                  <div className="relative rounded-[26px] border border-white/10 bg-[#0A1424]/70 p-6 shadow-2xl backdrop-blur-xl">
+
+                    <div className="flex items-center justify-between border-b border-white/[0.08] pb-5">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                        MINIMARKET JOSÉ
+                      </span>
+                      <span className="text-blue-300">✦</span>
+                    </div>
+
+                    <div className="py-12 text-center">
+
+                      <div className="mx-auto flex h-32 w-32 items-center justify-center rounded-[30px] border border-blue-300/20 bg-gradient-to-br from-blue-500/20 to-cyan-400/[0.05] shadow-[0_0_60px_rgba(37,99,235,.12)]">
+                        <span className="bg-gradient-to-br from-white via-blue-200 to-blue-500 bg-clip-text text-6xl font-black tracking-tighter text-transparent">
+                          MJ
+                        </span>
+                      </div>
+
+                      <h4 className="mt-7 text-xl font-black tracking-[0.08em]">
+                        MINIMARKET JOSÉ
+                      </h4>
+
+                      <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-300">
+                        Calidad · Variedad · Confianza
+                      </p>
+
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-white/[0.08] pt-5">
+                      <span className="text-[10px] text-slate-500">
+                        CENTRO DE GUARENAS
+                      </span>
+                      <span className="text-[10px] font-bold text-blue-300">
+                        VENEZUELA
+                      </span>
+                    </div>
+
+                  </div>
+                </div>
 
               </div>
-
-              <div className="border-t border-white/10 pt-6 flex justify-between items-center">
-                <span className="text-xs text-gray-400">
-                  CENTRO DE GUARENAS
-                </span>
-                <span className="text-xs text-[#d5b477] font-semibold">
-                  VENEZUELA
-                </span>
-              </div>
-
-            </div>
-
-            <div className="absolute -bottom-7 -left-7 bg-[#c49a54] text-[#142019] rounded-xl px-6 py-4 shadow-xl">
-              <p className="text-xs font-black tracking-widest">
-                MAYOR Y DETAL
-              </p>
-              <p className="text-[10px] mt-1 font-medium">
-                Siempre a tu servicio
-              </p>
             </div>
 
           </div>
 
-        </div>
-      </section>
+          {/* MÓDULOS DEL SISTEMA */}
+          <div className="mx-auto mt-12 w-full max-w-5xl">
 
-      {/* FRANJA COMERCIAL */}
-      <section className="relative z-10 border-y border-white/[0.08] bg-[#18231d]/80">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-8 grid grid-cols-1 sm:grid-cols-3 gap-7">
-
-          <div className="flex items-center gap-4">
-            <span className="text-[#d5b477] text-3xl font-light">
-              01
-            </span>
-            <div>
-              <p className="font-bold text-white">Calidad</p>
-              <p className="text-xs text-gray-400 mt-1">
-                Productos de confianza
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 sm:border-l sm:border-white/10 sm:pl-8">
-            <span className="text-[#d5b477] text-3xl font-light">
-              02
-            </span>
-            <div>
-              <p className="font-bold text-white">Variedad</p>
-              <p className="text-xs text-gray-400 mt-1">
-                Opciones para tus necesidades
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 sm:border-l sm:border-white/10 sm:pl-8">
-            <span className="text-[#d5b477] text-3xl font-light">
-              03
-            </span>
-            <div>
-              <p className="font-bold text-white">Buenos precios</p>
-              <p className="text-xs text-gray-400 mt-1">
-                Mayor y detal
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* NOSOTROS */}
-      <section
-        id="nosotros"
-        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-28"
-      >
-        <div className="max-w-3xl">
-
-          <span className="text-[#d5b477] text-xs font-bold tracking-[0.3em] uppercase">
-            Conoce nuestra marca
-          </span>
-
-          <h2 className="mt-6 text-4xl sm:text-5xl font-black leading-tight">
-            Cerca de ti,
-            <span className="bg-gradient-to-r from-[#f1d49b] via-[#c49a54] to-[#ead09b] bg-clip-text text-transparent">
-              {' '}comprometidos contigo.
-            </span>
-          </h2>
-
-          <p className="mt-7 text-gray-400 text-lg leading-relaxed">
-            MINIMARKET JOSÉ es una propuesta comercial ubicada en el
-            Centro de Guarenas, orientada a ofrecer productos de calidad
-            y alternativas de compra al mayor y al detal.
-          </p>
-
-          <p className="mt-5 text-gray-400 text-lg leading-relaxed">
-            Nuestra prioridad es brindar una atención cercana,
-            variedad y una experiencia comercial basada en la confianza.
-          </p>
-
-        </div>
-      </section>
-
-      {/* VENTAJAS */}
-      <section
-        id="ventajas"
-        className="relative z-10 bg-[#18231d]/70 border-y border-white/[0.07]"
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
-
-          <div className="max-w-2xl mb-14">
-
-            <span className="text-[#d5b477] text-xs font-bold tracking-[0.3em] uppercase">
-              Nuestra propuesta
-            </span>
-
-            <h2 className="mt-5 text-4xl sm:text-5xl font-black">
-              Lo que nos{' '}
-              <span className="bg-gradient-to-r from-[#f1d49b] via-[#c49a54] to-[#ead09b] bg-clip-text text-transparent">
-                distingue.
-              </span>
-            </h2>
-
-            <p className="mt-5 text-gray-400 leading-relaxed">
-              Trabajamos para ofrecerte una experiencia comercial
-              basada en calidad, variedad y buenos precios.
-            </p>
-
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5">
-
-            {advantages.map((item) => (
-              <article
-                key={item.number}
-                className="transition-all duration-300 hover:-translate-y-1 hover:border-[#c49a54]/50 hover:bg-white/[0.055] border border-white/10 bg-white/[0.025] rounded-2xl p-8"
-              >
-                <span className="text-4xl font-light text-[#d5b477]">
-                  {item.number}
-                </span>
-
-                <div className="w-10 h-[2px] bg-gradient-to-r from-[#c49a54] to-transparent mt-7 mb-6" />
-
-                <h3 className="text-xl font-bold text-white">
-                  {item.title}
+            <div className="mb-5 flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-bold text-white">
+                  Herramientas de gestión
                 </h3>
-
-                <p className="mt-4 text-sm text-gray-400 leading-relaxed">
-                  {item.description}
+                <p className="mt-1 text-xs text-slate-500">
+                  Funcionalidades de nuestra plataforma
                 </p>
-              </article>
-            ))}
+              </div>
 
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-300">
+                04 MÓDULOS
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+
+              {modules.map((module) => (
+                <article
+                  key={module.number}
+                  className="group rounded-2xl border border-white/[0.08] bg-[#111D30]/75 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-[#172944] sm:p-5"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/10 text-xl text-blue-300 transition group-hover:bg-blue-500/20">
+                      {module.icon}
+                    </span>
+                    <span className="text-[10px] font-bold text-slate-600">
+                      {module.number}
+                    </span>
+                  </div>
+
+                  <h4 className="mt-5 text-sm font-bold text-slate-200">
+                    {module.title}
+                  </h4>
+
+                  <p className="mt-2 text-[11px] leading-5 text-slate-500">
+                    {module.description}
+                  </p>
+                </article>
+              ))}
+
+            </div>
           </div>
 
-        </div>
-      </section>
+        </section>
 
-      {/* LLAMADA A LA ACCIÓN */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24">
+        {/* PIE DE APLICACIÓN */}
+        <footer className="mt-auto border-t border-white/[0.07] py-6">
 
-        <div className="relative overflow-hidden rounded-3xl border border-[#c49a54]/30 bg-gradient-to-br from-[#21372a] to-[#142019] p-9 sm:p-16 text-center">
+          <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
 
-          <div className="absolute w-72 h-72 rounded-full bg-emerald-400/10 blur-[90px] -top-32 -right-20" />
-
-          <div className="relative">
-
-            <span className="text-[#d5b477] text-xs tracking-[0.3em] font-bold uppercase">
-              MINIMARKET JOSÉ
-            </span>
-
-            <h2 className="mt-6 text-3xl sm:text-5xl font-black">
-              Bienvenido a nuestra casa.
-            </h2>
-
-            <p className="mt-5 text-gray-300 max-w-xl mx-auto leading-relaxed">
-              Accede a nuestra plataforma de gestión comercial
-              a través del sistema.
-            </p>
-
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-4 mt-9 bg-gradient-to-r from-[#d8b779] to-[#b78b48] text-[#172019] px-9 py-4 rounded-lg font-extrabold text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c49a54]/20"
-            >
-              ENTRAR AL SISTEMA
-              <span className="text-lg">→</span>
-            </Link>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="relative z-10 border-t border-white/10 bg-[#0b110e]">
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
-
-          <div className="flex flex-col md:flex-row justify-between items-center gap-7">
-
-            <div className="text-center md:text-left">
-              <p className="font-black tracking-[0.12em]">
-                MINIMARKET{' '}
-                <span className="text-[#d5b477]">JOSÉ</span>
+            <div>
+              <p className="text-xs font-bold tracking-wider text-slate-400">
+                MINIMARKET JOSÉ
               </p>
-
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="mt-1 text-[10px] text-slate-600">
                 Centro de Guarenas · Venezuela
               </p>
             </div>
 
-            <Link
-              href="/login"
-              className="text-sm text-[#d5b477] hover:text-white transition font-semibold"
-            >
-              Acceso al sistema →
-            </Link>
-
-            <p className="text-xs text-gray-600 text-center">
-              © {new Date().getFullYear()} MINIMARKET JOSÉ.
-              Todos los derechos reservados.
+            <p className="text-[10px] text-slate-600">
+              © {new Date().getFullYear()} Minimarket José. Todos los derechos reservados.
             </p>
+
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-blue-400" />
+              <span className="text-[10px] font-semibold tracking-wider text-slate-500">
+                PLATAFORMA COMERCIAL
+              </span>
+            </div>
 
           </div>
 
-        </div>
-      </footer>
+        </footer>
 
+      </div>
     </main>
   );
 }
+```
