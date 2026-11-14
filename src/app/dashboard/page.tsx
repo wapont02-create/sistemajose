@@ -572,7 +572,9 @@ export default function DashboardPOS() {
     useState<Product[]>([]);
 
   const [categoriesList, setCategoriesList] =
-    useState<string[]>([]);
+    useState<string[]>([
+     
+    ]);
 
   const [newCategoryInput, setNewCategoryInput] =
     useState('');
@@ -817,7 +819,7 @@ export default function DashboardPOS() {
     useState('');
 
   const [newCategory, setNewCategory] =
-    useState('');
+    useState('Comida');
 
   const [newDescription, setNewDescription] =
     useState('');
@@ -1365,18 +1367,41 @@ export default function DashboardPOS() {
         const prodData =
           await prodRes.json();
 
-        if (Array.isArray(prodData)) {
-          setProducts(prodData);
-
-          const extractedCats = Array.from(
-            new Set(
-              prodData
-                .map((p: any) => String(p.category || '').trim())
-                .filter((category: string) => category.length > 0)
-            )
+        if (
+          Array.isArray(
+            prodData
+          )
+        ) {
+          setProducts(
+            prodData
           );
 
-          setCategoriesList(extractedCats);
+          const extractedCats =
+            Array.from(
+              new Set(
+                prodData
+                  .map(
+                    (p: any) =>
+                      p.category
+                  )
+                  .filter(Boolean)
+              )
+            );
+
+          if (
+            extractedCats.length >
+            0
+          ) {
+            setCategoriesList(
+              prev =>
+                Array.from(
+                  new Set([
+                    ...prev,
+                    ...extractedCats
+                  ])
+                ) as string[]
+            );
+          }
         }
 
         const salesRes =
